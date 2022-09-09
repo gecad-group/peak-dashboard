@@ -1,2 +1,2 @@
-# peak-dashboard
-Dashboard extension to the PEAK framework.
+# PEAK Dashboard
+Dashboard used to monitor PEAK ecosystem.
