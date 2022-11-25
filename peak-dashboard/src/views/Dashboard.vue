@@ -216,7 +216,7 @@ export default {
     },
     fetchGraph() {
       axios
-        .get("http://" + process.env.VUE_APP_DF + "/tree")
+        .get(process.env.VUE_APP_DF_GROUPS_API)
         .then((response) => {
           if (JSON.stringify(response.data) != this.previous_graph) {
             this.previous_graph = JSON.stringify(response.data);
@@ -233,9 +233,11 @@ export default {
         categories: [],
         node_members: {}
       };
+      let nodes_sizes = {}
       raw_graph.nodes.forEach(function (node) {
         var group_size = raw_graph.node_members[node[0]].length;
-        this.graph.nodes.push({
+        nodes_sizes[node[0]] = (group_size + 1) * 10
+        this.graph.nodes.push({ 
           id: node[0],
           name: node[0],
           category: node[1],
@@ -248,10 +250,12 @@ export default {
       }, this);
 
       raw_graph.links.forEach(function (link) {
+        console.log(link[0])
+        console.log(this.graph.nodes[link[0]])
         this.graph.links.push({
           source: link[0],
           target: link[1],
-          value: link[2]
+          value: (nodes_sizes[link[0]] + nodes_sizes[link[1]]) / 2
         });
       }, this);
 

@@ -76,7 +76,7 @@ export default {
     methods: {
         fetchGraph() {
             axios
-                .get("http://" + process.env.VUE_APP_DF + "/dataanalysis")
+                .get(process.env.VUE_APP_DF_PLOTS_API)
                 .then((response) => {
                     var data = JSON.stringify(response.data)
                     if (data != this.previous_data) {
