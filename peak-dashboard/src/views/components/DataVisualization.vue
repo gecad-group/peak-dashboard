@@ -45,8 +45,7 @@
         <!-- end nav -->
         <!-- grid wrapper card -->
         <div class="wrapper-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 h-screen">
-            <div v-for="(n,i) in chartsOptions.length" 
-                class="card bg-white rounded-md pt-5 pl-5 shadow h-96">
+            <div v-for="(n, i) in chartsOptions.length" class="card bg-white rounded-md pt-5 pl-5 shadow h-96">
                 <v-chart :option="chartsOptions[i]" autoresize />
             </div>
         </div>
@@ -104,7 +103,14 @@ export default {
                             type: 'value'
                         },
                         yAxis: {
-                            type: 'value'
+                            type: 'value',
+                            axisLabel: {
+                                formatter: function (value) {
+                                    value = value + "";
+                                    value.replace(",",".");
+                                    return value;
+                                }
+                            }
                         },
                         series: []
                     }
