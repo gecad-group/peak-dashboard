@@ -45,8 +45,8 @@
         <!-- end nav -->
         <!-- grid wrapper card -->
         <div class="wrapper-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 h-screen">
-            <div v-for="(n, i) in chartsOptions.length" class="card bg-white rounded-md pt-5 pl-5 shadow h-96">
-                <v-chart :option="chartsOptions[i]" autoresize />
+            <div v-for="chart in chartsOptions" class="card bg-white rounded-md pt-5 pl-5 shadow h-96">
+                <v-chart :option="chart" autoresize />
             </div>
         </div>
         <!-- end wrapper card -->
@@ -67,7 +67,7 @@ export default {
     },
     data() {
         return {
-            chartsOptions: [],
+            chartsOptions: {},
             previous_data: null,
             timer: "",
         };
@@ -80,64 +80,17 @@ export default {
                     var data = JSON.stringify(response.data)
                     if (data != this.previous_data) {
                         this.previous_data = data;
-                        this.renderCharts(response.data);
+                        console.log(response.data)
+                        Object.keys(response.data).forEach((id) => {
+                            this.chartsOptions[id] = response.data[id]
+                        }, this);
                     }
                 });
-        },
-        renderCharts(raw_charts) {
-            this.chartsOptions = [];
-            var options = {};
-            Object.keys(raw_charts).forEach((chart_name) => {
-                if (
-                    raw_charts[chart_name].graph_options != null ||
-                    raw_charts[chart_name].graph_options != ""
-                ) {
-                    options = {
-                        title: {
-                            text: chart_name
-                        },
-                        tooltip: {
-                            trigger: 'axis'
-                        },
-                        xAxis: {
-                            type: 'value'
-                        },
-                        yAxis: {
-                            type: 'value',
-                            axisLabel: {
-                                formatter: function (value) {
-                                    value = value + "";
-                                    value.replace(",",".");
-                                    return value;
-                                }
-                            }
-                        },
-                        series: []
-                    }
-                    Object.keys(raw_charts[chart_name]['data']).forEach((data_array) => {
-                        options.series.push({
-                            data: raw_charts[chart_name]['data'][data_array],
-                            type: 'line',
-                            smooth: true
-                        })
-                        options.xAxis['data'] = [...Array(raw_charts[chart_name]['data'][data_array].length).keys()]
-                    }, this)
-                } else {
-                    options = raw_charts[chart_name]['graph_options']
-                }
-                this.chartsOptions.push(options)
-            }, this);
         },
     },
     mounted() {
         this.fetchGraph();
         this.timer = setInterval(this.fetchGraph, 5000);
-        //this.chartsOptions.grid = {
-        //    left: 0,
-        //    top: 0,
-        //    right: 0,
-        //    bottom: 0
-        //}
     },
     beforeUnmount() {
         clearInterval(this.timer);
