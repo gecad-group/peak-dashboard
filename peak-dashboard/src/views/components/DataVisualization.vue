@@ -90,7 +90,7 @@ export default {
     },
     mounted() {
         this.fetchGraph();
-        this.timer = setInterval(this.fetchGraph, 5000);
+        this.timer = setInterval(this.fetchGraph, 1000);
     },
     beforeUnmount() {
         clearInterval(this.timer);

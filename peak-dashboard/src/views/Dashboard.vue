@@ -338,7 +338,7 @@ export default {
     this.dragElement(document.getElementById("divAgentList"));
     this.fetchGraph();
     this.loading = false;
-    this.timer = setInterval(this.fetchGraph, 5000);
+    this.timer = setInterval(this.fetchGraph, 1000);
   },
   beforeUnmount() {
     clearInterval(this.timer);
