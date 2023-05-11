@@ -44,8 +44,8 @@
         </nav>
         <!-- end nav -->
         <!-- grid wrapper card -->
-        <div class="wrapper-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 h-screen">
-            <div v-for="chart in chartsOptions" class="card bg-white rounded-md pt-5 pl-5 shadow h-96">
+        <div class="wrapper-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-5 h-screen">
+            <div v-for="chart in chartsOptions" class="card bg-white rounded-md pt-5 pl-5 shadow h-3/4">
                 <v-chart :option="chart" autoresize />
             </div>
         </div>
