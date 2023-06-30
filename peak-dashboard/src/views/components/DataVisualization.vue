@@ -42,16 +42,14 @@
                 </li>
             </ol>
         </nav>
-        <!-- end nav -->
         <!-- grid wrapper card -->
-        <div class="wrapper-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-5 h-screen">
-            <div v-for="chart in chartsOptions" class="card bg-white rounded-md pt-5 pl-5 shadow h-3/4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-5 mt-5">
+            <div v-for="chart in chartsOptions" class="bg-white overflow-hidden shadow-lg rounded-lg pt-5 pl-5 h-[32rem]">
                 <v-chart :option="chart" autoresize />
             </div>
         </div>
         <!-- end wrapper card -->
     </div>
-    <!-- end wrapper card-->
 </template>
 
 <script>
