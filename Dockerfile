@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY peak-dashboard/ ./
 
-RUN npm install --production
+RUN npm install
 
 CMD ["npm", "run", "serve"]
+
+EXPOSE 8080
