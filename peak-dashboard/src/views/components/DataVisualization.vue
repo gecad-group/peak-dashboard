@@ -43,8 +43,8 @@
             </ol>
         </nav>
         <!-- grid wrapper card -->
-        <div class="grid md:grid-cols-1 lg:grid-cols-1 gap-5 mt-5">
-            <div v-for="chart in chartsOptions" class="bg-white overflow-hidden shadow-lg rounded-lg h-[55rem]">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-5 mt-5">
+            <div v-for="chart in chartsOptions" class="bg-white overflow-hidden shadow-lg rounded-lg h-[40rem]">
                 <v-chart :option="chart" autoresize />
             </div>
         </div>
